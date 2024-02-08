@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1" >
+    <test name="UserStory1" >
+        <groups>
+            <run>
+                <include name="userStory1"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Tests.TestCase" ></class>
+        </classes>
+    </test>
+
+</suite>
