@@ -40,6 +40,7 @@ public void loginCredentials()
 
 public void validateLogin()
 {
+    wait.until(ExpectedConditions.visibilityOfElementLocated(titleLogin));
     Assert.assertEquals("My Timesheets",driver.findElement(titleLogin).getText());
 }
 
@@ -69,8 +70,8 @@ public void createNewTabFocalPoint()
 
 public void clickTimesheetNextWeek()
 {
+
 driver.findElement(timesheetDropdown).click();
-wait.until(ExpectedConditions.visibilityOfElementLocated(timesheetNextWeek));
 driver.findElement(timesheetNextWeek).click();
 }
 

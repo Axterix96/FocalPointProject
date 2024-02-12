@@ -7,7 +7,7 @@ public class TestCase extends BaseTest {
 
     PomManager pomManager = new PomManager();
 
-    @Test(groups = "userStory1", priority = 1)
+    @Test
     public void testCase1()
     {
         pomManager.homePage.loginCredentials();
@@ -20,6 +20,7 @@ public class TestCase extends BaseTest {
         pomManager.homePage.clickTimesheetNextWeek();
         pomManager.timesheetPage.clickAventivTask();
         pomManager.timesheetPage.clickAventivTaskItem();
+        pomManager.timesheetPage.clickClearTimesheet();
 
 
     }

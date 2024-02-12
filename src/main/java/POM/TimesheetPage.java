@@ -1,9 +1,12 @@
 package POM;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
 
 public class TimesheetPage extends BasePage {
 
@@ -11,11 +14,13 @@ public class TimesheetPage extends BasePage {
 
     By aventivTaskItem = By.xpath("//p[@title='[Test Execution] QA - IT - P1820354 - TeleCore Capital Development 2022 Q']");
 
-    By taskMoveDate = By.xpath("//div[@class='fc-row fc-widget-header']//th[contains(text(),'Mon')]");
-////div[@class='fc-row fc-widget-header']//th[contains(text(),'Mon')]/../../../../../../../..//td[@class='fc-widget-content']
-    By taskMoveHour = By.xpath("//div[@class='fc-time-grid-container fc-scroller']//span[text()='8am']");
+    By taskMoveDate = By.xpath("//td[@class='fc-widget-content']//span[contains(text(),'8am')]//..//following-sibling::td");
+
+    By clearTimesheet = By.id("clearButton");
+
     public void clickAventivTask()
     {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(aventivTask));
         driver.findElement(aventivTask).click();
     }
 
@@ -24,9 +29,15 @@ public class TimesheetPage extends BasePage {
         Actions action = new Actions(driver);
         WebElement wb1 = driver.findElement(aventivTaskItem);
         WebElement wb2 = driver.findElement(taskMoveDate);
-        WebElement wb3 = driver.findElement(taskMoveHour);
-        action.dragAndDrop(wb1,wb2).build().perform();
-        action.dragAndDrop(wb1,wb3).build().perform();
+        action.moveToElement(wb1).pause(Duration.ofSeconds(1)).clickAndHold(wb1).pause(Duration.ofSeconds(1))
+                .moveByOffset(1,1).moveToElement(wb2).pause(Duration.ofSeconds(1)).release(wb2).build().perform();
+
+    }
+    public void clickClearTimesheet()
+    {
+        driver.findElement(clearTimesheet).click();
+        System.out.println(driver.switchTo().alert().getText());
+        driver.switchTo().alert().accept();
 
     }
 

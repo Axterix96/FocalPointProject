@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,29 +17,24 @@ public class BaseDriver {
 
     public WebDriverWait wait;
 
-    public void initializeDriver() throws IOException {
+
+    public void initializeDriver(String browser) throws IOException {
         //properties class
-        Properties prop = new Properties();
 
-        FileInputStream fis = new FileInputStream("src\\test\\java\\Tests\\GlobalData.properties");
-        prop.load(fis);
-
-
-        String browserName = prop.getProperty("browser");
 
 
         //checar los logs
-        if (browserName.equalsIgnoreCase("chrome")) {
+        if (browser.equalsIgnoreCase("chrome")) {
 
             driver = new ChromeDriver();
 
 
-        } else if (browserName.equalsIgnoreCase("edge")) {
+        } else if (browser.equalsIgnoreCase("edge")) {
 
             driver = new EdgeDriver();
 
 
-        } else if (browserName.equalsIgnoreCase("firefox")) {
+        } else if (browser.equalsIgnoreCase("firefox")) {
 
             driver = new FirefoxDriver();
 
